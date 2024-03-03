@@ -1,8 +1,8 @@
 <template>
 	<div
-		class="px-4 md:px-10 py-20 md:py-40 grid grid-cols-4 grid-rows-3 items-center justify-items-center gap-x-4 md:gap-x-20 gap-y-4 md:gap-y-10 max-w-screen-lg m-auto"
+		class="px-4 md:px-10 py-20 md:py-40 grid grid-cols-4 grid-rows-3 items-center justify-items-center gap-x-4 md:gap-x-20 gap-y-4 md:gap-y-10 max-w-screen-lg m-auto opacity-0 box"
 	>
-		<div class="text-center mb-6 order-4 col-span-4">
+		<div class="text-center mb-6 order-4 col-span-4 logo">
 			<p class="text-5xl whitespace-nowrap leading-relaxed font-heading">
 				Zelo.
 			</p>
@@ -140,11 +140,13 @@
 	}
 
 	onMounted(() => {
-		const items = document.querySelectorAll(".photo");
+		const box = document.querySelector(".box");
+		box && box.classList.remove("opacity-0");
 
+		const items = document.querySelectorAll(".photo");
 		gsap.from(items, {
 			ease: "power2.inOut",
-			duration: 0.6,
+			duration: 0.5,
 			opacity: 0,
 			scale: 0.8,
 			stagger: {
