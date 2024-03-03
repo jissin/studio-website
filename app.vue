@@ -1,134 +1,117 @@
 <template>
   <div>
     <main class="z-10 relative bg-primary">
-      <gallery />
+      <section>
+        <transition name="fade">
+          <gallery v-if="galleryVisible" />
+        </transition>
+      </section>
 
-      <section class="py-40 px-10 bg-secondary">
-        <h1 class="font-heading text-5xl text-center leading-loose">
-          About us
-        </h1>
-        <div
-          class="text-lg max-w-[40rem] m-auto [&>p]:mb-4 text-text-secondary text-center"
-        >
-          <p>
-            Zelo. is a design & dev studio crafting superb website. we excel in
-            both technical and design aspects of digital product development. I
-            manage teams of all sizes and remain hands-on in crafting
-            high-quality digital products.
-          </p>
-          <p>
-            Our expertise bridges the gap between developers, designers, clients
-            and other stakeholders, boosting productivity and ensuring project
-            success.
+      <section class="py-40 bg-secondary">
+        <div class="max-w-[40rem] m-auto px-10">
+          <h1 class="font-heading text-5xl text-center truncate mb-10">
+            WHAT WE DO
+          </h1>
+          <p class="text-xl text-inherit font-letter">
+            {{ $t("biz_scope") }}
           </p>
         </div>
       </section>
 
       <section class="py-40">
-        <h1 class="font-heading text-5xl text-center leading-loose">
-          PREVIOUS COLLABS
-        </h1>
+        <div class="m-auto">
+          <div class="px-10">
+            <h1 class="font-heading text-5xl text-center truncate mb-10">
+              COLLABS
+            </h1>
+          </div>
 
-        <carousel />
+          <carousel />
+        </div>
       </section>
 
-      <section class="bg-secondary py-40 px-10">
-        <h1 class="font-heading text-5xl text-center leading-loose">
-          features we deliver
-        </h1>
+      <section class="py-40 px-10 bg-secondary">
+        <div class="max-w-[40rem] m-auto">
+          <h1 class="font-heading text-5xl text-center truncate mb-10">
+            FEATURES
+          </h1>
 
-        <ul class="flex flex-col items-center">
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">
-              design & development
+          <features />
+        </div>
+      </section>
+
+      <section class="[&>p]:mb-2 py-40 px-10 mx-auto flex flex-col gap-2">
+        <div class="max-w-[40rem] m-auto font-letter">
+          <h2 class="font-heading mb-2 text-2xl">About Zelo.</h2>
+          <p class="text-lg text-text-secondary">
+            {{ $t("about_p1") }}
+          </p>
+          <p class="text-lg text-text-secondary mt-1">
+            {{ $t("about_p2") }}
+          </p>
+
+          <h2 class="font-heading mb-2 text-xl mt-4">The Team</h2>
+          <p class="text-md text-text-secondary">
+            {{ $t("team_intro") }}
+          </p>
+
+          <h2 class="font-heading mb-2 text-xl mt-4">The Policy</h2>
+
+          <p class="text-md text-text-secondary">
+            {{ $t("policy_p1") }}
+          </p>
+
+          <p class="text-md text-text-secondary mt-1">
+            {{ $t("policy_p1") }}
+          </p>
+
+          <div
+            class="w-20 border border-t border-dashed border-white/15 my-20 m-auto"
+          ></div>
+
+          <div
+            class="text-letter bg-secondary w-full p-[2rem] rounded-sm text-center flex flex-col"
+          >
+            <h2 class="text-lg tracking-snug text-inherit">
+              {{ $t("contact_via") }}
+              <a class="underline font-bold" href="mailto:hi@Zelo.studio"
+                >hi@Zelo.studio</a
+              >
             </h2>
-            <p class="text-text-secondary">
-              Beautiful design. Provide source code.
+
+            <p class="text-text-secondary text-base mt-[0.5rem]">
+              {{ $t("contact_msg_1") }}
             </p>
-          </li>
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">affordable price</h2>
-            <p class="text-text-secondary">Starting at $299.</p>
-          </li>
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">responsive</h2>
-            <p class="text-text-secondary"></p>
-          </li>
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">performant</h2>
-            <p class="text-text-secondary"></p>
-          </li>
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">a11y friendly</h2>
-            <p class="text-text-secondary"></p>
-          </li>
-          <li>
-            <h2 class="text-xl leading-loose text-inherit">free deploy</h2>
-            <p class="text-text-secondary"></p>
-          </li>
-        </ul>
-      </section>
 
-      <section
-        class="[&>p]:mb-2 max-w-[40rem] py-40 px-10 mx-auto flex flex-col gap-2"
-      >
-        <h1 class="font-heading leading-loose text-2xl">Why choose Zelo.</h1>
-        <p class="text-lg text-text-secondary">
-          Zelo. is independent and self-funded. We answer only to our community.
-          We're committed to building a great platform for those who enjoy the
-          art of photography, whether that's photographers themselves, curators,
-          agencies, collectors, and anyone in-between.
-        </p>
-        <p class="text-lg text-text-secondary">
-          The goal is to create a sustainable business that can support itself,
-          but most importantly, one that can truly support photographers.
-        </p>
-
-        <h1 class="font-heading leading-loose text-xl">The Team</h1>
-        <p class="text-md text-text-secondary">
-          Zelo. is currently a one-person operation. Sam is doing engineering,
-          design, support, and everything else in between! We would love to get
-          to a point where we can hire a small team to help build and grow
-          Zelo., but for now, we're staying small.
-        </p>
-
-        <h1 class="font-heading leading-loose text-xl">The Policy</h1>
-
-        <p class="text-md text-text-secondary">
-          Zelo. is currently a one-person operation. Sam is doing engineering,
-          design, support, and everything else in between! We would love to get
-          to a point where we can hire a small team to help build and grow
-          Zelo., but for now, we're staying small.
-        </p>
-
-        <div
-          class="w-20 border border-t border-dashed border-white/15 my-20 m-auto"
-        ></div>
-
-        <div
-          class="bg-secondary w-full py-[2rem] rounded-sm text-center flex flex-col"
-        >
-          <h2 class="text-lg tracking-snug text-inherit">
-            Contact us via <a class="underline font-bold">hi@Zelo.studio</a>
-          </h2>
-
-          <p class="text-text-secondary text-base mt-[0.5rem]">
-            Describe your needs even a few words, and we'll handle the rest!
-          </p>
-
-          <p class="text-base mt-[0.5rem] text-inherit font-bold">
-            Q1 2024 Available for work
-          </p>
+            <p class="text-base mt-[0.5rem] text-inherit font-bold">
+              {{ $t("contact_msg_2") }}
+            </p>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="flex flex-col p-10 bg-secondary sticky bottom-0 w-full z-0">
-      <h1 class="font-heading"></h1>
+    <footer class="flex flex-col p-10 sticky bottom-0 w-full z-0 bg-secondary">
       <p class="font-heading text-[30vw] opacity-10 leading-none">Zelo.</p>
     </footer>
   </div>
 </template>
+
+<script setup>
+  const galleryVisible = ref(true);
+  onMounted(() => {
+    window.addEventListener("resize", handleResize);
+  });
+  onUnmounted(() => {
+    window.removeEventListener("resize", handleResize);
+  });
+  const handleResize = useDebounceFn(() => {
+    galleryVisible.value = false;
+    setTimeout(() => {
+      galleryVisible.value = true;
+    }, 300);
+  }, 100);
+</script>
 
 <style>
   html,
@@ -136,8 +119,22 @@
     background: #000;
     color: #fff;
   }
+
   @font-face {
     font-family: heading;
     src: url("~/assets/fonts/heading.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: letter;
+    src: url("~/assets/fonts/letter.woff2") format("woff2");
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>

@@ -13,6 +13,8 @@
     "@nuxt/image": "latest",
     "@nuxtjs/i18n": "^8.1.1",
     "@nuxtjs/tailwindcss": "^6.11.1",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
     "nuxt": "^3.9.3",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
