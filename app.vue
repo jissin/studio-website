@@ -110,7 +110,7 @@
     setTimeout(() => {
       galleryVisible.value = true;
     }, 300);
-  }, 100);
+  }, 200);
 </script>
 
 <style>
