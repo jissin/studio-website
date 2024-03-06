@@ -5,7 +5,7 @@ export default defineI18nConfig(() => ({
     zh: {
       slogan: "Design & development. Crafted with excellence.",
       biz_scope:
-        "Creative Concepts / Brand & Identity / Commercial Ads / 3D / Data Visualization / Art, Generally all types of websites.",
+        "Creative Concepts / Brand & Identity / Commercial Ads / 3D / Motion / Data Visualization / Art, Generally all types of websites.",
       about_p1:
         "Zelo. is a design & dev studio crafting superb website. we excel in both technical and design aspects of website development.",
       about_p2:
