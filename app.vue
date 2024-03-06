@@ -7,7 +7,7 @@
 
       <section class="py-40 bg-secondary">
         <div class="max-w-[40rem] m-auto px-10">
-          <h1 class="font-heading text-5xl text-center truncate mb-10">
+          <h1 class="font-heading text-4xl text-center truncate mb-10">
             WHAT WE DO
           </h1>
           <p class="text-xl text-inherit font-letter">
@@ -19,7 +19,7 @@
       <section class="py-40">
         <div class="m-auto">
           <div class="px-10">
-            <h1 class="font-heading text-5xl text-center truncate mb-10">
+            <h1 class="font-heading text-4xl text-center truncate mb-10">
               COLLABS
             </h1>
           </div>
@@ -30,7 +30,7 @@
 
       <section class="py-40 px-10 bg-secondary">
         <div class="max-w-[40rem] m-auto">
-          <h1 class="font-heading text-5xl text-center truncate mb-10">
+          <h1 class="font-heading text-4xl text-center truncate mb-10">
             FEATURES
           </h1>
 
