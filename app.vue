@@ -2,9 +2,7 @@
   <div>
     <main class="z-10 relative bg-primary">
       <section>
-        <transition name="fade">
-          <gallery v-if="galleryVisible" />
-        </transition>
+        <gallery />
       </section>
 
       <section class="py-40 bg-secondary">
@@ -97,22 +95,6 @@
   </div>
 </template>
 
-<script setup>
-  const galleryVisible = ref(true);
-  onMounted(() => {
-    window.addEventListener("resize", handleResize);
-  });
-  onUnmounted(() => {
-    window.removeEventListener("resize", handleResize);
-  });
-  const handleResize = useDebounceFn(() => {
-    galleryVisible.value = false;
-    setTimeout(() => {
-      galleryVisible.value = true;
-    }, 300);
-  }, 200);
-</script>
-
 <style>
   html,
   body {
@@ -128,13 +110,5 @@
   @font-face {
     font-family: letter;
     src: url("~/assets/fonts/letter.woff2") format("woff2");
-  }
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 1s;
-  }
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
   }
 </style>

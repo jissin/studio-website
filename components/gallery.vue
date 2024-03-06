@@ -15,21 +15,29 @@
 			:src="item.src"
 			:width="item.width"
 			:height="item.height"
-			class="photo bg-white/10 w-full will-change-transform cursor-pointer bg-black grid place-items-center"
+			class="photo bg-white/10 cursor-pointer object-contain"
 			:alt="item.caption"
 			v-for="(item, index) in sources"
-			@click="throttleToggle(index)"
+			@click="throttleOpen(index)"
 			:style="{ order: index }"
 			:id="'figure-' + index"
 		/>
 
-		<Transition>
-			<div
-				v-if="bgVisible"
-				class="bg-black z-10 fixed inset-0"
-				@click="close"
-			></div>
-		</Transition>
+		<div
+			v-if="activeIndex > -1"
+			class="fixed inset-0 bg-transparent cursor-pointer z-10 grid place-items-center"
+			style="color-mix: multiply"
+			id="mask"
+			@click="close"
+		>
+			<NuxtImg
+				:src="sources[activeIndex].src"
+				:width="sources[activeIndex].width"
+				:height="sources[activeIndex].height"
+				id="active-image"
+				class="m-auto will-change-transform"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -88,55 +96,98 @@
 		},
 	];
 
-	const bgVisible = ref(false);
+	const throttleOpen = useThrottleFn(open, 520);
 
-	const throttleToggle = useThrottleFn(toggle, 520);
+	const activeIndex = ref(-1);
 
-	function toggle(index) {
-		const element = document.querySelector(`#figure-${index}`);
-		const { top, left, width, height } = element.getBoundingClientRect();
-		const radio = width / height;
-		const { innerWidth, innerHeight } = window;
+	function open(index) {
+		activeIndex.value = index;
+		document.body.style.overflow = "hidden";
+		nextTick(() => {
+			const activeImage = document.querySelector("#active-image");
+			const activeImageRect = activeImage.getBoundingClientRect();
 
-		let end = {};
+			const originalImage = document.querySelector(`#figure-${index}`);
+			const originalImageRect = originalImage.getBoundingClientRect();
 
-		if (innerWidth >= innerHeight) {
-			end.height = innerHeight;
-			end.width = end.height * radio;
-		} else {
-			end.width = innerWidth;
-			end.height = end.width / radio;
-		}
-		end.x = (innerWidth - end.width) / 2;
-		end.y = (innerHeight - end.height) / 2;
+			const scaleRadio = originalImageRect.width / activeImageRect.width;
 
-		if (element.classList.contains("z-20")) {
-			document.body.style.overflow = "auto";
-			setTimeout(() => element.classList.remove("z-20"), 300);
-		} else {
-			element.classList.add("z-20");
-			document.body.style.overflow = "hidden";
-		}
+			originalImage.classList.toggle("invisible");
 
-		bgVisible.value = !bgVisible.value;
+			const { x, y } = getScaledClientRect(activeImage, scaleRadio);
 
-		gsap.to(element, {
-			x: end.x - left,
-			y: end.y - top,
-			scale: end.width / width,
-			duration: 0.5,
-			ease: "power2.inOut",
-			onComplete: (e) => {},
+			gsap.from(activeImage, {
+				x: originalImageRect.x - x,
+				y: originalImageRect.y - y,
+				scale: scaleRadio,
+				duration: 0.5,
+				ease: "power2.inOut",
+				onComplete: (e) => {},
+			});
+
+			const mask = document.querySelector("#mask");
+			gsap.to(mask, {
+				backgroundColor: "rgba(0,0,0)",
+				duration: 0.5,
+				ease: "power2.inOut",
+			});
 		});
 	}
 
 	function close() {
-		const index = Array.from(document.querySelectorAll(".photo")).findIndex(
-			(element) => element.classList.contains("z-20"),
-		);
-		if (index > -1) {
-			toggle(index);
-		}
+		const index = activeIndex.value;
+		const activeImage = document.querySelector("#active-image");
+		const activeImageRect = activeImage.getBoundingClientRect();
+
+		const originalImage = document.querySelector(`#figure-${index}`);
+		const originalImageRect = originalImage.getBoundingClientRect();
+
+		const scaleRadio = originalImageRect.width / activeImageRect.width;
+
+		const { x, y } = getScaledClientRect(activeImage, scaleRadio);
+		gsap.to(activeImage, {
+			x: originalImageRect.x - x,
+			y: originalImageRect.y - y,
+			scale: scaleRadio,
+			duration: 0.5,
+			ease: "power2.inOut",
+			onComplete: (e) => {
+				originalImage.classList.toggle("invisible");
+				activeIndex.value = -1;
+				document.body.style.overflow = "auto";
+			},
+		});
+
+		const mask = document.querySelector("#mask");
+		gsap.to(mask, {
+			backgroundColor: "rgba(0,0,0,0)",
+			duration: 0.5,
+			ease: "power2.inOut",
+		});
+	}
+
+	function getScaledClientRect(element, radio) {
+		// 获取元素原始的位置信息
+		const rect1 = element.getBoundingClientRect();
+
+		// 计算缩放后的元素大小
+		const width = rect1.width * radio;
+		const height = rect1.height * radio;
+
+		// 计算缩放后的元素中心点
+		const { innerWidth, innerHeight } = window;
+		const centerX = innerWidth / 2;
+		const centerY = innerHeight / 2;
+
+		// 计算缩放后的元素位置
+		const rect2 = {
+			x: centerX - width / 2,
+			y: centerY - height / 2,
+			width,
+			height,
+		};
+
+		return rect2;
 	}
 
 	onMounted(() => {
@@ -153,20 +204,6 @@
 				each: 0.1,
 				from: "random",
 			},
-			onComplete: (e) =>
-				items.forEach((item) => item.classList.add("origin-top-left")),
 		});
 	});
 </script>
-
-<style>
-	.v-enter-active,
-	.v-leave-active {
-		transition: opacity 0.5s ease;
-	}
-
-	.v-enter-from,
-	.v-leave-to {
-		opacity: 0;
-	}
-</style>
