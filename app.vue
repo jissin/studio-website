@@ -13,6 +13,9 @@
           <p class="text-xl text-inherit font-letter">
             {{ $t("biz_scope") }}
           </p>
+          <p class="text-xl text-inherit font-letter mt-2">
+            {{ $t("biz_scope_2") }}
+          </p>
         </div>
       </section>
 
@@ -40,11 +43,11 @@
 
       <section class="[&>p]:mb-2 py-40 px-10 mx-auto flex flex-col gap-2">
         <div class="max-w-[40rem] m-auto font-letter">
-          <h2 class="font-heading mb-2 text-2xl">About Zelo.</h2>
-          <p class="text-lg text-text-secondary">
+          <h2 class="font-heading mb-2 text-xl">About Zelo.</h2>
+          <p class="text-md text-text-secondary">
             {{ $t("about_p1") }}
           </p>
-          <p class="text-lg text-text-secondary mt-1">
+          <p class="text-md text-text-secondary mt-2">
             {{ $t("about_p2") }}
           </p>
 
@@ -59,8 +62,8 @@
             {{ $t("policy_p1") }}
           </p>
 
-          <p class="text-md text-text-secondary mt-1">
-            {{ $t("policy_p1") }}
+          <p class="text-md text-text-secondary mt-2">
+            {{ $t("policy_p2") }}
           </p>
 
           <div

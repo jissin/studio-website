@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  const features = Array(8)
+  const features = Array(5)
     .fill(null)
     .map((_, index) => ({
       title: `features_${index + 1}_title`,
