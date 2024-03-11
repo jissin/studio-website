@@ -13,7 +13,7 @@
           <p class="text-xl text-inherit font-letter">
             {{ $t("biz_scope") }}
           </p>
-          <p class="text-xl text-inherit font-letter mt-2">
+          <p class="text-xl text-inherit font-letter mt-2 opacity-60">
             {{ $t("biz_scope_2") }}
           </p>
         </div>
