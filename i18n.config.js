@@ -7,15 +7,15 @@ export default defineI18nConfig(() => ({
       biz_scope_2:
         "Landing Page / Web Design / Creative Concepts / Brand & Identity / Commercial Ads / 3D / Motion / Data Visualization / Art / WeChat Mini Program",
       about_p1:
-        "Zelo. is a design & develop studio crafting superb website. we excel in both technical and design aspects of website development.",
+        "Zelo. is a design & dev studio crafting superb website. we excel in both technical and design aspects of website development.",
       about_p2:
         "Our expertise bridges the gap between developers, designers, clients and other stakeholders, boosting productivity and ensuring project success.",
       features_1_title: "The design",
       features_1_desc: "Beautiful, minimal, superb",
       features_2_title: "The development",
-      features_2_desc: "Performant, responsive, SEO-Friendly.",
+      features_2_desc: "Performant, responsive, SEO-Friendly",
       features_3_title: "The pricing",
-      features_3_desc: "Starting at $399, choose your plan.",
+      features_3_desc: "Starting at $399",
       features_4_title: "Technology Stack",
       features_4_desc: "Nuxt, GSA, WebG, Canvas, ...",
       features_5_title: "Build & Deploy",
@@ -41,17 +41,17 @@ export default defineI18nConfig(() => ({
       about_p2:
         "我们拥有专业的技术，能够弥合开发人员、设计师、客户和其他利益相关者之间的沟通鸿沟，从而提高工作效率并确保项目成功。",
       features_1_title: "设计",
-      features_1_desc: "出色，极简主义，精湛",
+      features_1_desc: "美观，极简主义，出色",
       features_2_title: "开发",
       features_2_desc: "高性能，响应式，SEO友好",
       features_3_title: "定价",
-      features_3_desc: "¥2999起，付款方案任你选",
+      features_3_desc: "¥2999起",
       features_4_title: "技术栈",
       features_4_desc: "Nuxt, GSAP, WebGL, Canvas, ...",
       features_5_title: "部署",
       features_5_desc: "免费构建和部署",
       team_intro:
-        "Zelo. 目前由 J. 一人独立运营。他负责工程、设计、支持以及所有其他杂务！我们期待着能发展到可以组建一支小型团队共同建设和发展 Zelo 的阶段，但目前我们将保持精简的团队架构。",
+        "Zelo. 目前由 J. 一人独立运营。他负责开发、设计、支持以及所有其他杂务！我们期待着能发展到可以组建一支小型团队共同建设和发展 Zelo 的阶段，但目前我们将保持精简的团队架构。",
       policy_p1:
         "预付款：为了确保项目顺利进行并交付高质量成果，我们要求所有项目预先付款。我们提供无退款政策，但如果项目未能交付，我们将全额退款。",
       policy_p2:
