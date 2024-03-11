@@ -11,7 +11,7 @@ export default defineI18nConfig(() => ({
       about_p2:
         "Our expertise bridges the gap between developers, designers, clients and other stakeholders, boosting productivity and ensuring project success.",
       features_1_title: "The design",
-      features_1_desc: "Beautiful, minimal, superb",
+      features_1_desc: "Beautiful, minimal, fluent",
       features_2_title: "The development",
       features_2_desc: "Performant, responsive, SEO-Friendly",
       features_3_title: "The pricing",
@@ -41,7 +41,7 @@ export default defineI18nConfig(() => ({
       about_p2:
         "我们拥有专业的技术，能够弥合开发人员、设计师、客户和其他利益相关者之间的沟通鸿沟，从而提高工作效率并确保项目成功。",
       features_1_title: "设计",
-      features_1_desc: "美观，极简主义，出色",
+      features_1_desc: "美观，极简主义，流畅",
       features_2_title: "开发",
       features_2_desc: "高性能，响应式，SEO友好",
       features_3_title: "定价",
