@@ -11,31 +11,37 @@
 			</p>
 		</div>
 
-		<NuxtImg
+		<img
 			:src="item.src"
-			:width="item.width"
-			:height="item.height"
 			class="photo bg-white/10 cursor-pointer object-contain"
 			:alt="item.caption"
 			v-for="(item, index) in sources"
 			@click="throttleOpen(index)"
-			:style="{ order: index }"
+			:style="{ order: index, aspectRatio: item.width / item.height }"
 			:id="'figure-' + index"
 		/>
 
 		<div
 			v-if="activeIndex > -1"
-			class="fixed inset-0 bg-transparent cursor-pointer z-10 grid place-items-center"
-			style="color-mix: multiply"
+			class="fixed inset-0 bg-transparent cursor-pointer z-10 flex justify-center items-center"
 			id="mask"
 			@click="close"
 		>
-			<NuxtImg
+			<!-- 			<NuxtImg
 				:src="sources[activeIndex].src"
 				:width="sources[activeIndex].width"
 				:height="sources[activeIndex].height"
 				id="active-image"
-				class="m-auto will-change-transform"
+				class="will-change-transform"
+			/> -->
+			<img
+				:src="sources[activeIndex].src"
+				id="active-image"
+				class="will-change-transform"
+				:class="screenRadioGTImageRadio ? 'h-full' : 'w-full'"
+				:style="{
+					aspectRatio: sources[activeIndex].width / sources[activeIndex].height,
+				}"
 			/>
 		</div>
 	</div>
@@ -63,7 +69,6 @@
 			height: 1038,
 			caption: "caption text",
 		},
-
 		{
 			src: "/showcases/4.webp",
 			width: 1400,
@@ -96,23 +101,25 @@
 		},
 	];
 
+	const screenRadio = useScreenRadio();
+
 	const throttleOpen = useThrottleFn(open, 520);
+	const throttleClose = useThrottleFn(close, 520);
 
 	const activeIndex = ref(-1);
 
 	function open(index) {
 		activeIndex.value = index;
-		document.body.style.overflow = "hidden";
 		nextTick(() => {
 			const activeImage = document.querySelector("#active-image");
 			const activeImageRect = activeImage.getBoundingClientRect();
-
 			const originalImage = document.querySelector(`#figure-${index}`);
 			const originalImageRect = originalImage.getBoundingClientRect();
-
 			const scaleRadio = originalImageRect.width / activeImageRect.width;
 
-			originalImage.classList.toggle("invisible");
+			setTimeout(() => {
+				originalImage.classList.toggle("invisible");
+			}, 70);
 
 			const { x, y } = getScaledClientRect(activeImage, scaleRadio);
 
@@ -138,13 +145,11 @@
 		const index = activeIndex.value;
 		const activeImage = document.querySelector("#active-image");
 		const activeImageRect = activeImage.getBoundingClientRect();
-
 		const originalImage = document.querySelector(`#figure-${index}`);
 		const originalImageRect = originalImage.getBoundingClientRect();
-
 		const scaleRadio = originalImageRect.width / activeImageRect.width;
-
 		const { x, y } = getScaledClientRect(activeImage, scaleRadio);
+
 		gsap.to(activeImage, {
 			x: originalImageRect.x - x,
 			y: originalImageRect.y - y,
@@ -154,7 +159,6 @@
 			onComplete: (e) => {
 				originalImage.classList.toggle("invisible");
 				activeIndex.value = -1;
-				document.body.style.overflow = "auto";
 			},
 		});
 
@@ -190,9 +194,28 @@
 		return rect2;
 	}
 
+	const screenRadioGTImageRadio = ref(false);
+
+	function updateScreenRadioGTImageRadio() {
+		const { width, height } =
+			document.querySelector("#active-image")?.getBoundingClientRect() || {};
+		screenRadioGTImageRadio.value = screenRadio.value > width / height;
+	}
+
 	onMounted(() => {
 		const box = document.querySelector(".box");
 		box && box.classList.remove("opacity-0");
+
+		watchEffect(() => {
+			if (activeIndex.value > -1) {
+				document.body.style.overflow = "hidden";
+				nextTick(updateScreenRadioGTImageRadio);
+			} else {
+				document.body.style.overflow = "auto";
+			}
+		});
+
+		watchEffect(updateScreenRadioGTImageRadio);
 
 		const items = document.querySelectorAll(".photo");
 		gsap.from(items, {
